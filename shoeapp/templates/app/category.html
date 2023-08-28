@@ -1,0 +1,29 @@
+{% extends 'app/base.html' %} {% load static %} {% block title %} Category {% endblock %} {% block main-content %}
+
+<div class="container-lg">
+    <div class="row p-4">
+
+        <div class="col-sm-3 shadow">
+            <div class="list-group p4">
+                {% for val in title %}
+                <a href="{% url 'category-title' val.title %}" class="list-group-item list-group-item-action" arial-current="true">{{val.title}}</a> {% endfor %}
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="row justify-content-center shadow">
+                {% for prod in product %}
+                <div class="card m-4 shadow zoom-hover" style="width: 18rem;">
+                    <img src="{{prod.product_image.url}}" style="height:15rem;" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{prod.title}}</h5>
+                        <p class="fw-bold card-text text-danger">Rs.{{prod.discounted_price}}/- <small class="fw-light text-decoration-line-through">{{prod.selling_price}}</small></p>
+                        <a href="{% url 'product-detail' prod.id %}" class="btn btn-primary">View Detail</a>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content%}

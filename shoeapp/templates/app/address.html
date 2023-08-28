@@ -1,0 +1,56 @@
+{% extends 'app/base.html' %} {% load static %} {% block title %} Profile {% endblock %} {% block main-content %}
+
+
+<div class="container my-3">
+    <div class="row ">
+        <div class="col-md-3 shadow text-center">
+            <h3>Welcome <span class="text-capitalize">{{request.user}}</span></h3>
+
+            <a class="btn btn-primary zoom-hover" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+            Press Profile Address
+          </a>
+
+
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">P&A</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="shadow p-2">
+                        <ul>
+                            <li class="d-grid my-3"><a href="{% url 'profile' %}" class="btn btn-primary">Profile</a></li>
+                            <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-primary">Address</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-9 shadow">
+            <div class="row">
+                {% for ad in add %}
+                <div class="col-md-6 my-3">
+                    <div class="card shadow zoom-hover">
+                        <div class="card-body">
+                            <h3>Address {{forloop.counter}}</h3>
+                            <p><strong>Name:</strong> {{ad.name}}</p>
+                            <p><strong>Locality:</strong> {{ad.locality}}</p>
+                            <p><strong>Mobile:</strong> {{ad.mobile}}</p>
+                            <p><strong>City:</strong> {{ad.city}}</p>
+                            <p><strong>State:</strong> {{ad.state}}</p>
+                            <p><strong>Pincode:</strong> {{ad.zipcode}}</p>
+                            <a href="{% url 'updateAddress' pk=ad.id %}" type="btn" class="btn btn-success px-3 mx-2">Update</a>
+                            <a href="{% url 'deleteAddress' pk=ad.id %}" type="btn" class="btn btn-danger px-3 mx-2">Delete</a>
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+        {% endblock main-content %}
